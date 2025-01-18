@@ -1,2 +1,0 @@
-# notesapp
-React Demo App
