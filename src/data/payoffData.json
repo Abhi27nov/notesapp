@@ -1,0 +1,87 @@
+{
+    "Class A": {
+      "Product 1": {
+        "payoffs": [
+          { "underlying": -100, "payoff": 0 },
+          { "underlying": -80, "payoff": 100 },
+          { "underlying": -60, "payoff": 100 },
+          { "underlying": -40, "payoff": 100 },
+          { "underlying": -20, "payoff": 100 },
+          { "underlying": 0, "payoff": 100 },
+          { "underlying": 20, "payoff": 120 },
+          { "underlying": 40, "payoff": 140 },
+          { "underlying": 60, "payoff": 160 },
+          { "underlying": 80, "payoff": 180 },
+          { "underlying": 100, "payoff": 200 }
+        ],
+        "description": [
+          "This is a capital-protected structured product.",
+          "It offers 100% protection of the principal amount.",
+          "Upside participation starts at 0% and increases to 200%."
+        ]
+      },
+      "Product 2": {
+        "payoffs": [
+          { "underlying": -100, "payoff": 50 },
+          { "underlying": -80, "payoff": 60 },
+          { "underlying": -60, "payoff": 70 },
+          { "underlying": -40, "payoff": 80 },
+          { "underlying": -20, "payoff": 90 },
+          { "underlying": 0, "payoff": 100 },
+          { "underlying": 20, "payoff": 120 },
+          { "underlying": 40, "payoff": 140 },
+          { "underlying": 60, "payoff": 160 },
+          { "underlying": 80, "payoff": 180 },
+          { "underlying": 100, "payoff": 200 }
+        ],
+        "description": [
+          "This product provides partial capital protection.",
+          "It offers reduced downside risk with limited upside participation.",
+          "Ideal for moderate-risk investors."
+        ]
+      }
+    },
+    "Class B": {
+      "Product 3": {
+        "payoffs": [
+          { "underlying": -100, "payoff": 20 },
+          { "underlying": -80, "payoff": 50 },
+          { "underlying": -60, "payoff": 80 },
+          { "underlying": -40, "payoff": 110 },
+          { "underlying": -20, "payoff": 140 },
+          { "underlying": 0, "payoff": 170 },
+          { "underlying": 20, "payoff": 200 },
+          { "underlying": 40, "payoff": 200 },
+          { "underlying": 60, "payoff": 200 },
+          { "underlying": 80, "payoff": 200 },
+          { "underlying": 100, "payoff": 200 }
+        ],
+        "description": [
+          "High-risk, high-reward structured product.",
+          "Offers significant upside potential with limited protection.",
+          "Best suited for aggressive investors."
+        ]
+      },
+      "Product 4": {
+        "payoffs": [
+          { "underlying": -100, "payoff": 10 },
+          { "underlying": -80, "payoff": 30 },
+          { "underlying": -60, "payoff": 50 },
+          { "underlying": -40, "payoff": 70 },
+          { "underlying": -20, "payoff": 90 },
+          { "underlying": 0, "payoff": 110 },
+          { "underlying": 20, "payoff": 140 },
+          { "underlying": 40, "payoff": 160 },
+          { "underlying": 60, "payoff": 180 },
+          { "underlying": 80, "payoff": 200 },
+          { "underlying": 100, "payoff": 200 }
+        ],
+        "description": [
+          "Low-risk structured product with steady returns.",
+          "Offers stable growth potential with full capital protection.",
+          "Ideal for conservative investors."
+        ]
+      }
+    }
+  }
+  
