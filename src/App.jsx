@@ -26,35 +26,37 @@ function App() {
     <div className="app-container">
       <div className="dropdown-section">
         <h2>Select a Class and Product</h2>
-        <div className="dropdown-container">
-          <label htmlFor="class-select">Parent Class: </label>
-          <select id="class-select" value={selectedClass} onChange={handleClassChange}>
-            <option value="" disabled>
-              -- Select a Class --
-            </option>
-            {Object.keys(payoffData).map((className) => (
-              <option key={className} value={className}>
-                {className}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {selectedClass && (
-          <div className="dropdown-container">
-            <label htmlFor="product-select">Product: </label>
-            <select id="product-select" value={selectedProduct} onChange={handleProductChange}>
+        <div className="dropdowns-container">
+          <div className="dropdown-group">
+            <label htmlFor="class-select">Parent Class: </label>
+            <select id="class-select" value={selectedClass} onChange={handleClassChange}>
               <option value="" disabled>
-                -- Select a Product --
+                -- Select a Class --
               </option>
-              {Object.keys(payoffData[selectedClass]).map((productName) => (
-                <option key={productName} value={productName}>
-                  {productName}
+              {Object.keys(payoffData).map((className) => (
+                <option key={className} value={className}>
+                  {className}
                 </option>
               ))}
             </select>
           </div>
-        )}
+
+          {selectedClass && (
+            <div className="dropdown-group">
+              <label htmlFor="product-select">Product: </label>
+              <select id="product-select" value={selectedProduct} onChange={handleProductChange}>
+                <option value="" disabled>
+                  -- Select a Product --
+                </option>
+                {Object.keys(payoffData[selectedClass]).map((productName) => (
+                  <option key={productName} value={productName}>
+                    {productName}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="content-section">
@@ -62,12 +64,12 @@ function App() {
           {chartData ? (
             <>
               <h3>{selectedProduct} Payoff Chart</h3>
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="95%" height="90%">
                 <LineChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
                     dataKey="underlying"
-                    label={{ value: "Underlying Performance (%)", position: "insideBottom", dy: 10 }}
+                    label={{ value: "Underlying Performance (%)", position: "insideBottom", dy: 7 }}
                     domain={[-100, 100]}
                     type="number"
                   />
@@ -76,7 +78,7 @@ function App() {
                     domain={[0, 200]}
                   />
                   <Tooltip />
-                  <Legend />
+                  <Legend verticalAlign="top" height={36} />
                   <Line type="monotone" dataKey="payoff" stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -90,9 +92,9 @@ function App() {
           {descriptionData ? (
             <>
               <h3>Product Description</h3>
-              <ul>
+              <ul className="description-list">
                 {descriptionData.map((point, index) => (
-                  <li key={index}>{point}</li>
+                  <li key={index} className="description-item">{point}</li>
                 ))}
               </ul>
             </>

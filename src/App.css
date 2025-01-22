@@ -1,22 +1,37 @@
-/* App.css */
 .app-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  font-family: Arial, sans-serif;
   padding: 20px;
 }
 
 .dropdown-section {
-  background-color: #f8f8f8;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-.dropdown-container {
+h2 {
+  margin-bottom: 10px;
+}
+
+.dropdowns-container {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 20px;
+}
+
+.dropdown-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
 }
 
 .content-section {
@@ -27,7 +42,7 @@
 .chart-container {
   flex: 1;
   max-width: 50%;
-  height: 400px;
+  height: 520px;
   background-color: #ffffff;
   padding: 20px;
   border: 1px solid #ddd;
@@ -35,23 +50,17 @@
 }
 
 .description-container {
+  border: 1px solid #ccc;
+  padding: 10px;
   flex: 1;
-  max-width: 50%;
-  background-color: #f8f8f8;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  height: 520px;
 }
 
-h2, h3 {
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style-type: disc;
+.description-list {
+  margin-top: 10px;
   padding-left: 20px;
 }
 
-li {
-  margin-bottom: 5px;
+.description-item {
+  margin-bottom: 8px;
 }
