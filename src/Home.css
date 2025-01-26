@@ -1,0 +1,29 @@
+.home-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.home-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.home-section {
+  margin-top: 30px;
+}
+
+.home-section h2 {
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.home-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.home-section ul li {
+  margin-bottom: 5px;
+}

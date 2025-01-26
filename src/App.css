@@ -1,66 +1,30 @@
-.app-container {
+.app {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.dropdown-section {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 15px;
+.navbar {
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
   border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-h2 {
-  margin-bottom: 10px;
+.nav-link:hover {
+  background-color: #555;
 }
 
-.dropdowns-container {
-  display: flex;
-  gap: 20px;
-}
-
-.dropdown-group {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-select {
-  padding: 5px;
-  font-size: 14px;
-}
-
-.content-section {
-  display: flex;
-  gap: 20px;
-}
-
-.chart-container {
-  flex: 1;
-  max-width: 50%;
-  height: 520px;
-  background-color: #ffffff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.description-container {
-  border: 1px solid #ccc;
-  padding: 10px;
-  flex: 1;
-  height: 520px;
-}
-
-.description-list {
-  margin-top: 10px;
-  padding-left: 20px;
-}
-
-.description-item {
-  margin-bottom: 8px;
+.active-link {
+  background-color: #007bff;
+  color: white;
 }

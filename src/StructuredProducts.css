@@ -1,0 +1,86 @@
+/* Aligns the dropdowns and Go button nicely */
+.dropdown-section {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.dropdowns-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dropdown-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.go-button {
+  margin-top: 8px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.go-button:hover {
+  background-color: #0056b3;
+}
+
+.go-button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+/* Restores original container styles for chart and description */
+.content-section {
+  display: flex;
+  gap: 20px;
+}
+
+.chart-container {
+  flex: 1;
+  max-width: 50%;
+  height: 520px;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.description-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  flex: 1;
+  height: 520px;
+}
+
+.description-list {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.description-item {
+  margin-bottom: 8px;
+}
