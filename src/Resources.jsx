@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './Resources.css';
 
 function Resources() {
@@ -14,6 +14,7 @@ function Resources() {
           Financial Research
         </Link>
       </div>
+      <Outlet />
     </div>
   );
 }

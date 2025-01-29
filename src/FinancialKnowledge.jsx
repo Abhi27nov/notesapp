@@ -1,84 +1,93 @@
-import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import './FinancialKnowledge.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import { pdfjs } from "react-pdf"; // Ensure correct import
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "./FinancialKnowledge.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// Correct worker version
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.10.111/build/pdf.worker.min.js`;
 
-const FinancialKnowledge = () => {
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+function FinancialKnowledge() {
+  const [selectedPdf, setSelectedPdf] = useState(null);
 
+  // Dummy PDF file (Replace with actual GitHub link)
   const pdfFiles = {
-    macroeconomics: 'https://raw.githubusercontent.com/your-github-repo/path-to/Macroeconomics.pdf',
-  };
-
-  const openPdfViewer = (topic) => {
-    setSelectedTopic(topic);
-    setCurrentPage(1);
+    Macroeconomics: "https://github.com/Abhi27nov/notesapp/blob/dev/assets/macroeconomics.pdf",
+    Microeconomics: null,
+    "Capital Budgeting": null,
+    "Capital Financing": null,
+    "Liquidity Management": null,
+    "Financial Ratios": null,
+    Equity: null,
+    Debt: null,
+    Currency: null,
+    Commodity: null,
+    "Alternate Investment": null,
+    Derivatives: null,
+    "Structured Products": null,
   };
 
   return (
     <div className="financial-knowledge-container">
       <h1>Financial Knowledge</h1>
+
+      {/* Hyperlink Container */}
       <div className="topics-container">
-        <h2>Topics:</h2>
-        <div className="topic-section">
-          <h3>1) Economics:</h3>
-          <ul>
-            <li>
-              <button className="pdf-button" onClick={() => openPdfViewer('macroeconomics')}>
-                Macroeconomics
-              </button>
-            </li>
-            <li><a href="#">Microeconomics</a></li>
-          </ul>
+        <div className="category">
+          <h2>1) Economics:</h2>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Macroeconomics)}>
+            (i) Macroeconomics
+          </Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Microeconomics)}>
+            (ii) Microeconomics
+          </Link>
         </div>
-        <div className="topic-section">
-          <h3>2) Corporate Finance:</h3>
-          <ul>
-            <li><a href="#">Capital Budgeting</a></li>
-            <li><a href="#">Capital Financing</a></li>
-            <li><a href="#">Liquidity Management</a></li>
-            <li><a href="#">Financial Ratios</a></li>
-          </ul>
+
+        <div className="category">
+          <h2>2) Corporate Finance:</h2>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Capital Budgeting"])}>
+            (i) Capital Budgeting
+          </Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Capital Financing"])}>
+            (ii) Capital Financing
+          </Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Liquidity Management"])}>
+            (iii) Liquidity Management
+          </Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Financial Ratios"])}>
+            (iv) Financial Ratios
+          </Link>
         </div>
-        <div className="topic-section">
-          <h3>3) Financial Markets:</h3>
-          <ul>
-            <li><a href="#">Equity</a></li>
-            <li><a href="#">Debt</a></li>
-            <li><a href="#">Currency</a></li>
-            <li><a href="#">Commodity</a></li>
-            <li><a href="#">Alternative Investment</a></li>
-            <li><a href="#">Derivatives</a></li>
-            <li><a href="#">Structured Products</a></li>
-          </ul>
+
+        <div className="category">
+          <h2>3) Financial Markets:</h2>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Equity)}>(i) Equity</Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Debt)}>(ii) Debt</Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Currency)}>(iii) Currency</Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Commodity)}>(iv) Commodity</Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Alternate Investment"])}>
+            (v) Alternate Investment
+          </Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles.Derivatives)}>(vi) Derivatives</Link>
+          <Link to="#" onClick={() => setSelectedPdf(pdfFiles["Structured Products"])}>
+            (vii) Structured Products
+          </Link>
         </div>
       </div>
 
-      {selectedTopic && pdfFiles[selectedTopic] && (
-        <div className="pdf-viewer-container">
-          <div className="pdf-navigation">
-            <button disabled={currentPage <= 1} onClick={() => setCurrentPage(currentPage - 1)}>
-              ← Prev
-            </button>
-            <span>
-              Page {currentPage} of {numPages}
-            </span>
-            <button disabled={currentPage >= numPages} onClick={() => setCurrentPage(currentPage + 1)}>
-              Next →
-            </button>
-          </div>
-          <Document file={pdfFiles[selectedTopic]} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
-            <Page pageNumber={currentPage} />
-          </Document>
-        </div>
-      )}
+      {/* PDF Viewer Container */}
+      <div className="pdf-viewer-container">
+        {selectedPdf ? (
+          <Worker workerUrl={pdfjs.GlobalWorkerOptions.workerSrc}>
+            <Viewer fileUrl={selectedPdf} />
+          </Worker>
+        ) : (
+          <p className="pdf-placeholder">Click on a topic to view the PDF.</p>
+        )}
+      </div>
     </div>
   );
-};
+}
 
 export default FinancialKnowledge;
