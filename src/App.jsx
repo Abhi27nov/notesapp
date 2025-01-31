@@ -7,7 +7,7 @@ import Resources from './Resources';
 import StructuredProducts from './StructuredProducts';
 import Indices from './Indices';
 import BaseFinancialInstruments from './BaseFinancialInstruments';
-import FinancialKnowledge from './FinancialKnowledge';
+import FinancialKnowledge from "./components/FinancialKnowledge";
 import FinancialResearch from './FinancialResearch';
 
 function App() {
