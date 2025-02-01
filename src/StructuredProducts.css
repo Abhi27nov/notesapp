@@ -70,10 +70,13 @@ select {
 }
 
 .description-container {
-  border: 1px solid #ccc;
-  padding: 10px;
   flex: 1;
+  max-width: 50%;
   height: 520px;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .description-list {
