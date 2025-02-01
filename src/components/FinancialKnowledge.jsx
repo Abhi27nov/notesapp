@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./FinancialKnowledge.css";
 
@@ -32,9 +32,27 @@ const topics = [
 function FinancialKnowledge() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [expandedCategory, setExpandedCategory] = useState(null);
+  const dropdownRef = useRef(null);
 
+  // Function to toggle dropdown
   const toggleCategory = (category) => {
     setExpandedCategory(expandedCategory === category ? null : category);
+  };
+
+  // Function to close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setExpandedCategory(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Function to handle subtopic click
+  const handleSubtopicClick = () => {
+    setExpandedCategory(null);
   };
 
   const nextSlide = () => {
@@ -48,9 +66,9 @@ function FinancialKnowledge() {
   return (
     <div className="financial-knowledge-container">
       <h1>Financial Knowledge</h1>
-      
+
       {/* Dropdown Topics Container */}
-      <div className="dropdowns-container">
+      <div className="dropdowns-container" ref={dropdownRef}>
         {topics.map((topic) => (
           <div key={topic.category} className="dropdown-section">
             <button className="dropdown-button" onClick={() => toggleCategory(topic.category)}>
@@ -66,7 +84,7 @@ function FinancialKnowledge() {
                 >
                   {topic.subtopics.map((subtopic) => (
                     <li key={subtopic} className="dropdown-item">
-                      <a href="#">{subtopic}</a>
+                      <a href="#" onClick={handleSubtopicClick}>{subtopic}</a>
                     </li>
                   ))}
                 </motion.ul>
@@ -76,27 +94,29 @@ function FinancialKnowledge() {
         ))}
       </div>
 
-      {/* Animated Slideshow */}
-      <div className="slideshow-container">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
-            className="slide"
-          >
-            <h2>{slides[currentSlide].title}</h2>
-            <p>{slides[currentSlide].content}</p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className="nav-buttons">
-        <button onClick={prevSlide}>Prev</button>
-        <button onClick={nextSlide}>Next</button>
+      {/* Slideshow Wrapper */}
+      <div className="slideshow-wrapper">
+        <div className="slideshow-container">
+          <button className="arrow left-arrow" onClick={prevSlide}>
+            ❮
+          </button>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+              className="slide"
+            >
+              <h2>{slides[currentSlide].title}</h2>
+              <p>{slides[currentSlide].content}</p>
+            </motion.div>
+          </AnimatePresence>
+          <button className="arrow right-arrow" onClick={nextSlide}>
+            ❯
+          </button>
+        </div>
       </div>
     </div>
   );
