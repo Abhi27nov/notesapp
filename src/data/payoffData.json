@@ -1,38 +1,41 @@
 {
-    "Class A": {
-      "Product 1": {
+    "Capital Protected": {
+      "Participation": {
         "payoffs": [
           { "underlying": -100, "payoff": 0 },
-          { "underlying": -80, "payoff": 100 },
-          { "underlying": -60, "payoff": 100 },
-          { "underlying": -40, "payoff": 100 },
-          { "underlying": -20, "payoff": 100 },
-          { "underlying": 0, "payoff": 100 },
-          { "underlying": 20, "payoff": 120 },
-          { "underlying": 40, "payoff": 140 },
-          { "underlying": 60, "payoff": 160 },
-          { "underlying": 80, "payoff": 180 },
-          { "underlying": 100, "payoff": 200 }
+          { "underlying": -80, "payoff": 0 },
+          { "underlying": -60, "payoff": 0 },
+          { "underlying": -40, "payoff": 0 },
+          { "underlying": -20, "payoff": 0 },
+          { "underlying": 0, "payoff": 0 },
+          { "underlying": 20, "payoff": 20 },
+          { "underlying": 40, "payoff": 40 },
+          { "underlying": 60, "payoff": 60 },
+          { "underlying": 80, "payoff": 80 },
+          { "underlying": 100, "payoff": 100 }
         ],
         "description": [
           "This is a capital-protected structured product.",
-          "It offers 100% protection of the principal amount.",
-          "Upside participation starts at 0% and increases to 200%."
+          "It offers fixed protection of the principal amount. The protection could be 100% or lower.",
+          "In this illustration, capital protection is 100%, hence the minimum payoff is 0%.",
+          "Upside participation could be leveraged or deleveraged.",
+          "Leverage is equal to the slope of the graph when underlying performance is positive.",
+          "In this illustration, Participation Leverage is 1. If this was 1.2, then Underlying Performance of 20% would yield 24% (1.2 x 20%) on the product.",
+          "If Participation Leverage is 0, then the payoff would be a flat line and the product would only pay interest payment at maturity.",
+          "Cost of the product increases as leverage and/or capital protection increases."
         ]
       },
-      "Product 2": {
+      "Barrier Participation": {
         "payoffs": [
-          { "underlying": -100, "payoff": 50 },
-          { "underlying": -80, "payoff": 60 },
-          { "underlying": -60, "payoff": 70 },
-          { "underlying": -40, "payoff": 80 },
-          { "underlying": -20, "payoff": 90 },
-          { "underlying": 0, "payoff": 100 },
-          { "underlying": 20, "payoff": 120 },
-          { "underlying": 40, "payoff": 140 },
-          { "underlying": 60, "payoff": 160 },
-          { "underlying": 80, "payoff": 180 },
-          { "underlying": 100, "payoff": 200 }
+          { "underlying": -100, "payoff": 0 },
+          { "underlying": -80, "payoff": 0 },
+          { "underlying": -60, "payoff": 0 },
+          { "underlying": -40, "payoff": 0 },
+          { "underlying": -20, "payoff": 0 },
+          { "underlying": 0, "payoff": 0 },
+          { "underlying": 20, "payoff": 20 },
+          { "underlying": 40, "payoff": 40 },
+          { "underlying": 60, "payoff": 60 }
         ],
         "description": [
           "This product provides partial capital protection.",
@@ -41,8 +44,8 @@
         ]
       }
     },
-    "Class B": {
-      "Product 3": {
+    "Yield Enhancement": {
+      "Discount Certificate": {
         "payoffs": [
           { "underlying": -100, "payoff": 20 },
           { "underlying": -80, "payoff": 50 },
@@ -62,7 +65,7 @@
           "Best suited for aggressive investors."
         ]
       },
-      "Product 4": {
+      "Reverse Convertible": {
         "payoffs": [
           { "underlying": -100, "payoff": 10 },
           { "underlying": -80, "payoff": 30 },

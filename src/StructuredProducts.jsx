@@ -83,7 +83,7 @@ function StructuredProducts() {
           <div className="chart-container">
             {chartData ? (
               <>
-                <h3>{selectedProduct} Payoff Chart</h3>
+                <h3>{selectedClass} - {selectedProduct}</h3>
                 <ResponsiveContainer width="95%" height="90%">
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -99,11 +99,11 @@ function StructuredProducts() {
                     />
                     <YAxis
                       label={{
-                        value: 'Payoff (%)',
+                        value: 'Product Return (%)',
                         angle: -90,
                         position: 'insideLeft',
                       }}
-                      domain={[0, 200]}
+                      domain={[-100, 100]}
                     />
                     <Tooltip />
                     <Legend verticalAlign="top" height={36} />
