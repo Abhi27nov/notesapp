@@ -9,17 +9,19 @@ function StructuredProducts() {
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
   const [isGoClicked, setIsGoClicked] = useState(false);
-  const [showBarrier, setShowBarrier] = useState(true); // Toggle state for barrier
+  const [showBarrier, setShowBarrier] = useState(true); // Default: Barrier shown if exists
 
   const handleClassChange = (event) => {
     setSelectedClass(event.target.value);
     setSelectedProduct('');
     setIsGoClicked(false);
+    setShowBarrier(true); // Reset barrier toggle
   };
 
   const handleProductChange = (event) => {
     setSelectedProduct(event.target.value);
     setIsGoClicked(false);
+    setShowBarrier(true); // Reset barrier toggle
   };
 
   const handleGoClick = () => {
@@ -35,6 +37,9 @@ function StructuredProducts() {
 
   const chartData = productData ? productData.payoffs : null;
   const descriptionData = productData ? productData.description : null;
+
+  // Check if the selected product contains at least one barrier key
+  const hasBarrier = chartData ? chartData.some((item) => item.hasOwnProperty('barrier')) : false;
 
   return (
     <div className="structured-products-page">
@@ -82,22 +87,26 @@ function StructuredProducts() {
           <div className="chart-container">
             {chartData ? (
               <>
-                {/* Chart Header and Barrier Toggle in Same Line */}
+                {/* Chart Header with Barrier Toggle (Only If Barrier Exists) */}
                 <div className="chart-header">
                   <h3>{selectedClass} - {selectedProduct}</h3>
-                  <div className="toggle-container">
-                    <label className="toggle-label">Barrier</label>
-                    <label className="switch">
-                      <input 
-                        type="checkbox" 
-                        checked={showBarrier} 
-                        onChange={handleBarrierToggle} 
-                      />
-                      <span className="slider round"></span>
-                    </label>
-                  </div>
+
+                  {hasBarrier && (
+                    <div className="toggle-container">
+                      <label className="toggle-label">Barrier</label>
+                      <label className="switch">
+                        <input 
+                          type="checkbox" 
+                          checked={showBarrier} 
+                          onChange={handleBarrierToggle} 
+                        />
+                        <span className="slider round"></span>
+                      </label>
+                    </div>
+                  )}
                 </div>
 
+                {/* Responsive Chart */}
                 <ResponsiveContainer width="95%" height="90%">
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -121,14 +130,14 @@ function StructuredProducts() {
                     />
                     <Tooltip />
 
-                    {/* Static Legend - "Payoff" is always visible, "Barrier" appears/disappears dynamically */}
+                    {/* Static Legend - "Payoff" always visible, "Barrier" appears only if exists */}
                     <Legend 
                       verticalAlign="top" 
                       align="center" 
                       height={36} 
                       payload={[
                         { value: 'Payoff', type: 'line', id: 'payoff', color: '#8884d8' },
-                        ...(showBarrier ? [{ value: 'Barrier', type: 'line', id: 'barrier', color: 'red' }] : [])
+                        ...(hasBarrier && showBarrier ? [{ value: 'Barrier', type: 'line', id: 'barrier', color: 'red' }] : [])
                       ]}
                     />
 
@@ -142,7 +151,7 @@ function StructuredProducts() {
                     />
 
                     {/* Barrier Line (Appears Based on Toggle) */}
-                    {showBarrier && productData.payoffs.some(item => item.barrier !== undefined) && (
+                    {hasBarrier && showBarrier && (
                       <Line
                         type="monotone"
                         dataKey="barrier"
