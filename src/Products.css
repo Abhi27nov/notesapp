@@ -1,6 +1,9 @@
 .products-container {
   font-family: Arial, sans-serif;
   padding: 20px;
+  color: white; /* White text */
+  background-color: black; /* Pitch-black background */
+  min-height: 100vh;
 }
 
 .products-tabs {
@@ -22,7 +25,7 @@
 }
 
 .tab-link:hover {
-  background-color: #eaeaea;
+  background-color: #333;
   color: #000;
 }
 

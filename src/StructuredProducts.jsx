@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine
 } from 'recharts';
 import './StructuredProducts.css';
 import payoffData from './data/payoffData.json';
@@ -9,19 +9,19 @@ function StructuredProducts() {
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
   const [isGoClicked, setIsGoClicked] = useState(false);
-  const [showBarrier, setShowBarrier] = useState(true); // Default: Barrier shown if exists
+  const [showBarrier, setShowBarrier] = useState(true);
 
   const handleClassChange = (event) => {
     setSelectedClass(event.target.value);
     setSelectedProduct('');
     setIsGoClicked(false);
-    setShowBarrier(true); // Reset barrier toggle
+    setShowBarrier(true);
   };
 
   const handleProductChange = (event) => {
     setSelectedProduct(event.target.value);
     setIsGoClicked(false);
-    setShowBarrier(true); // Reset barrier toggle
+    setShowBarrier(true);
   };
 
   const handleGoClick = () => {
@@ -38,8 +38,9 @@ function StructuredProducts() {
   const chartData = productData ? productData.payoffs : null;
   const descriptionData = productData ? productData.description : null;
 
-  // Check if the selected product contains at least one barrier key
-  const hasBarrier = chartData ? chartData.some((item) => item.hasOwnProperty('barrier')) : false;
+  // Extract barrier_xaxis and barrier_yaxis values
+  const barrierXValue = productData?.barrier_xaxis ?? null;
+  const barrierYValue = productData?.barrier_yaxis ?? null;
 
   return (
     <div className="structured-products-page">
@@ -87,11 +88,11 @@ function StructuredProducts() {
           <div className="chart-container">
             {chartData ? (
               <>
-                {/* Chart Header with Barrier Toggle (Only If Barrier Exists) */}
+                {/* Chart Header with Barrier Toggle (Only If Barrier Y Exists) */}
                 <div className="chart-header">
                   <h3>{selectedClass} - {selectedProduct}</h3>
 
-                  {hasBarrier && (
+                  {barrierYValue !== null && (
                     <div className="toggle-container">
                       <label className="toggle-label">Barrier</label>
                       <label className="switch">
@@ -112,52 +113,68 @@ function StructuredProducts() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                       dataKey="underlying"
-                      label={{
-                        value: 'Underlying Performance (%)',
-                        position: 'insideBottom',
-                        dy: 7,
-                      }}
                       domain={[-100, 100]}
                       type="number"
+                      tick={{ fill: '#000' }} // Default ticks
+                      tickFormatter={(tick) => {
+                        if (barrierXValue !== null && tick === barrierXValue) {
+                          return <tspan fill="red">{tick}</tspan>;
+                        }
+                        return tick;
+                      }}
                     />
                     <YAxis
-                      label={{
-                        value: 'Product Return (%)',
-                        angle: -90,
-                        position: 'insideLeft',
-                      }}
                       domain={[-100, 100]}
+                      tick={{ fill: '#000' }} // Default ticks
+                      tickFormatter={(tick) => {
+                        if (barrierYValue !== null && tick === barrierYValue) {
+                          return <tspan fill="red">{tick}</tspan>;
+                        }
+                        return tick;
+                      }}
                     />
                     <Tooltip />
 
-                    {/* Static Legend - "Payoff" always visible, "Barrier" appears only if exists */}
+                    {/* Static Legend */}
                     <Legend 
                       verticalAlign="top" 
                       align="center" 
                       height={36} 
                       payload={[
                         { value: 'Payoff', type: 'line', id: 'payoff', color: '#8884d8' },
-                        ...(hasBarrier && showBarrier ? [{ value: 'Barrier', type: 'line', id: 'barrier', color: 'red' }] : [])
+                        ...(barrierYValue !== null ? [{ value: 'Barrier', type: 'line', id: 'barrier', color: 'red' }] : [])
                       ]}
                     />
 
-                    {/* Payoff Line (Always Visible) */}
+                    {/* Payoff Line (Turns Dotted When Barrier is ON) */}
                     <Line 
                       type="monotone" 
                       dataKey="payoff" 
                       stroke="#8884d8" 
                       activeDot={{ r: 8 }} 
                       name="Payoff"
+                      strokeDasharray={showBarrier ? "5 5" : "0"}
                     />
 
-                    {/* Barrier Line (Appears Based on Toggle) */}
-                    {hasBarrier && showBarrier && (
-                      <Line
-                        type="monotone"
-                        dataKey="barrier"
-                        stroke="red"
-                        activeDot={{ r: 8 }} 
-                        name="Barrier"
+                    {/* Horizontal Barrier Line (Appears When Toggle is ON) */}
+                    {barrierYValue !== null && showBarrier && (
+                      <ReferenceLine 
+                        y={barrierYValue} 
+                        stroke="red" 
+                        strokeWidth={2} 
+                      />
+                    )}
+
+                    {/* Vertical Barrier Line (Always Visible) */}
+                    {barrierXValue !== null && (
+                      <ReferenceLine 
+                        x={barrierXValue} 
+                        stroke="red" 
+                        strokeDasharray="5 5"
+                        segment={[
+                          { x: barrierXValue, y: 0 },
+                          { x: barrierXValue, y: Math.min(...chartData.map((d) => d.payoff)) }
+                        ]}
                       />
                     )}
                   </LineChart>

@@ -27,19 +27,21 @@
       },
       "Barrier Participation": {
         "payoffs": [
-          { "underlying": -100, "payoff": 0, "barrier": 20 },
-          { "underlying": -80, "payoff": 0, "barrier": 20 },
-          { "underlying": -60, "payoff": 0, "barrier": 20 },
-          { "underlying": -40, "payoff": 0, "barrier": 20 },
-          { "underlying": -20, "payoff": 0, "barrier": 20 },
-          { "underlying": 0, "payoff": 0, "barrier": 20 },
-          { "underlying": 20, "payoff": 20, "barrier": 20 },
-          { "underlying": 40, "payoff": 40, "barrier": 20 },
-          { "underlying": 60, "payoff": 60, "barrier": 20 },
-          { "underlying": 60, "payoff": 60, "barrier": 20 },
-          { "underlying": 80, "barrier": 20 },
-          { "underlying": 100, "barrier": 20 }
+          { "underlying": -100, "payoff": 0 },
+          { "underlying": -80, "payoff": 0 },
+          { "underlying": -60, "payoff": 0 },
+          { "underlying": -40, "payoff": 0 },
+          { "underlying": -20, "payoff": 0 },
+          { "underlying": 0, "payoff": 0 },
+          { "underlying": 20, "payoff": 20 },
+          { "underlying": 40, "payoff": 40 },
+          { "underlying": 60, "payoff": 60 },
+          { "underlying": 60, "payoff": 60 },
+          { "underlying": 80 },
+          { "underlying": 100 }
         ],
+        "barrier_yaxis": 20,
+        "barrier_xaxis": 60,
         "description": [
           "This product provides partial capital protection.",
           "It offers reduced downside risk with limited upside participation.",

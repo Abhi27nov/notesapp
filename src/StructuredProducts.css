@@ -63,6 +63,7 @@ select {
   flex: 1;
   max-width: 50%;
   height: 520px;
+  color: #000;
   background-color: #ffffff;
   padding: 20px;
   border: 1px solid #ddd;
@@ -74,6 +75,7 @@ select {
   flex: 1;
   max-width: 50%;
   height: 520px;
+  color: #000;
   background-color: #ffffff;
   padding: 20px;
   border: 1px solid #ddd;
